@@ -36,7 +36,7 @@ These instructions are based on Google Cloud Platform, Google Apps Script, and G
 1. In the property value field, type in the AWS secret key that is associated with the AWS access key
 1. Select "Add row"
 1. In the property name field, type in "aws_default_region"
-1. In the property value field, type in the default AWS region
+1. In the property value field, type in the default AWS region (e.g. "us-east-2")
 1. Select "Save"
 
 ## Publish / Deploy Google Apps Script Project
