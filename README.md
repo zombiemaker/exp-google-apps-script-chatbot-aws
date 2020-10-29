@@ -21,6 +21,7 @@ These instructions are based on Google Cloud Platform, Google Apps Script, and G
 1. Select  "New project"
 1. Type in the name of your project
 1. Copy the files in this git repo over your Google Apps Script project using the same file names
+1. If you want to log debug messages, set the debug variable in Code.gs to true
 1. Select save button
 
 ## Configure Google Apps Script Script Properties 
