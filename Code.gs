@@ -27,7 +27,6 @@ function onMessage(event) {
 
   var userName = "";
   
-  
   if (event.space.type == "DM") {
     userName = "You";
   } else {
@@ -256,16 +255,14 @@ function handle_aws_s3({awsScriptProperties, commandArguments}) {
       if (debug) { Logger.log("/aws s3 called without command"); }
 
       outMessage.text = 
-`/aws called without specified AWS service
-Type \"/aws help\" for more information`;
+`/aws s3 called without specified service command
+Type \"/aws s3 help\" for more information`;
       break;
         
     default:
       outMessage.text = 
-`Unrecognized aws s3 sub-command ${commandArguments[2]}
-
-Sub-commands supported:
-  /aws s3 list-buckets`;
+`Unrecognized aws s3 service command ${commandArguments[2]}
+Type \"/aws s3 help\" for more information`;
   }
 
   if (debug) { Logger.log("function handle_aws_s3: Exit"); }
@@ -287,7 +284,7 @@ function handle_aws_s3_help({ awsScriptProperties, commandArguments }) {
 
   outMessage.text = 
 `Usage: /aws s3 <command> [parameters]
-  
+
   /aws s3 help = get this help message
 
 AWS s3 commands supported:
