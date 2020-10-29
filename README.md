@@ -75,7 +75,7 @@ If you want to customize the avatar icon that Google Chat uses for your chatbot 
 1. Select "Create Project"
 1. NOTE: There seems to be a bug in GCP here where the new project does not appear on the webpage.  Simply refresh the webpage.
 
-## Create A Service Account On Google Cloud Platform (GCP)
+## (NOT NEEDED) Create A Service Account On Google Cloud Platform (GCP)
 
 1. Navigate in a web browser to GCP Console - https://console.developers.google.com/
 1. Select Navigation Menu (upper lefthand corner) > IAM & Admin > Service Accounts
@@ -135,6 +135,7 @@ If you want to customize the avatar icon that Google Chat uses for your chatbot 
 - Google Apps Script Reference - https://developers.google.com/apps-script/reference
 - GCP Resource Manager - https://console.cloud.google.com/cloud-resource-manager
 - GCP Developer Console - https://console.developers.google.com/
+- GCP Hangouts Chat Bot - https://developers.google.com/hangouts/chat/how-tos/bots-publish
 - AWS JavaScript Client - https://github.com/smithy545/aws-apps-scripts
 - AWS JavaScript SDK (for reference - does not work in Google Apps Script) - https://github.com/aws/aws-sdk-js
 - GitHub Pages - https://pages.github.com/
