@@ -54,7 +54,7 @@ These instructions are based on Google Cloud Platform, Google Apps Script, and G
 
 ## (Optional) Hosting Google Chat Avatar Icon File Using GitHub Pages
 
-If you want to customize the avatar icon that Google Chat uses for your chatbot and you need a place to host the icon file, you can use GitHub Pages.  If you store your git repo for this project in GitHub, this gives you the added convenience of storing the icon file with your source code.
+If you want to customize the avatar icon that Google Chat uses for your chatbot and you need a place to host the icon file, you can use GitHub Pages.  If you store your git repo for this project in GitHub, this gives you the added convenience of storing the icon file with your source code.  To find a free icon, simply use Google Search with the search phrase "free bot icon".  Download the icon and add to your project repo.
 
 1. Create a repo for your project on GitHub
 1. Push your code to the repo with the icon file
