@@ -93,7 +93,9 @@ function onRemoveFromSpace(event) {
       (event.space.name ? event.space.name : "this chat"));
 }
 
-// Process AWS subcommands
+/*
+  AWS Service Handler Routing
+*/
 function handleSlashCommand_aws(event) {
   if (debug) { Logger.log("function handleSlashCommand_aws: Enter"); }
 
@@ -166,9 +168,9 @@ function handleSlashCommand_aws(event) {
   return outMessage;
 }
 
-
-
-/***************** AWS Commands *****************/
+/*
+  Bot Help Command Handler
+*/
 function handle_aws_help({awsScriptProperties, commandArguments}) {
   if (debug) { Logger.log("function handle_aws_help: Enter"); }
   var outMessage = {};
@@ -186,6 +188,9 @@ function handle_aws_help({awsScriptProperties, commandArguments}) {
   return outMessage;
 }
 
+/*
+  AWS IAM Service Command Handler Routing
+*/
 function handle_aws_iam({awsScriptProperties, commandArguments}) {
   if (debug) { Logger.log("function handle_aws_iam: Enter"); }
   var outMessage = {};
@@ -195,6 +200,9 @@ function handle_aws_iam({awsScriptProperties, commandArguments}) {
   return outMessage
 }
 
+/*
+  AWS VPC Service Command Handler Routing
+*/
 function handle_aws_vpc({awsScriptProperties, commandArguments}) {
   if (debug) { Logger.log("function handle_aws_vpc: Enter"); }
   var outMessage = {};
@@ -204,6 +212,9 @@ function handle_aws_vpc({awsScriptProperties, commandArguments}) {
   return outMessage
 }
 
+/*
+  AWS S3 Service Command Handler Routing
+*/
 function handle_aws_s3({awsScriptProperties, commandArguments}) {
   if (debug) { Logger.log("function handle_aws_s3: Enter"); }
   var outMessage = {};
@@ -211,19 +222,14 @@ function handle_aws_s3({awsScriptProperties, commandArguments}) {
   switch (commandArguments[2]) {
     case "help":  // /aws s3 help
       if (debug) { Logger.log("/aws s3 help command called"); }
-      
-      outMessage.text = "Usage: /aws s3 <command> [parameters]"
-      + "\n\n  /aws s3 help = get this help message"
-      + "\n\nAWS s3 commands supported:"
-      + "\n  - ls = list S3 resources";
 
       outMessage = handle_aws_s3_help({ awsScriptProperties: awsScriptProperties, commandArguments: commandArguments });
       break;
     
-    case "list-buckets":  // /aws s3 list-buckets
-      if (debug) { Logger.log("/aws s3 list-buckets command called"); }
+    case "ls":  // /aws s3 ls
+      if (debug) { Logger.log("/aws s3 ls command called"); }
 
-      outMessage = handle_aws_s3_ListBuckets({ awsScriptProperties: awsScriptProperties, commandArguments: commandArguments });
+      outMessage = handle_aws_s3_ls({ awsScriptProperties: awsScriptProperties, commandArguments: commandArguments });
       break;
 
     case undefined:
@@ -252,13 +258,22 @@ function handle_aws_ec2({awsScriptProperties, commandArguments}) {
   return outMessage
 }
 
+function handle_aws_s3_help({ awsScriptProperties, commandArguments }) {
+  if (debug) { Logger.log("function handle_aws_s3_help: Enter"); }
+  var outMessage = { cards: [] };
 
+  outMessage.text = "Usage: /aws s3 <command> [parameters]"
+    + "\n\n  /aws s3 help = get this help message"
+    + "\n\nAWS s3 commands supported:"
+    + "\n  - ls = list S3 resources";
 
+  if (debug) { Logger.log("function handle_aws_s3_help: Exit"); }
+  return outMessage;
+}
 
-/***************** AWS S3 Commands *****************/
-
-function handle_aws_s3_ListBuckets({awsScriptProperties,commandArguments}) {
-  if (debug) { Logger.log("function aws_s3_ListBuckets: Enter"); }
+/***************** AWS S3 Command Handlers *****************/
+function handle_aws_s3_ls({awsScriptProperties,commandArguments}) {
+  if (debug) { Logger.log("function aws_s3_ls: Enter"); }
   var outMessage = { cards: [] };
   var card1 = {
       header: {},
@@ -333,7 +348,7 @@ function handle_aws_s3_ListBuckets({awsScriptProperties,commandArguments}) {
     msgBuckets = msgBuckets + name;
   }
   
-  if (debug) { Logger.log("function aws_s3_ListBuckets: msgBuckets = " + msgBuckets); }
+  if (debug) { Logger.log("function aws_s3_ls: msgBuckets = " + msgBuckets); }
 
   var bucketListWidget = {
     textParagraph: {
@@ -344,8 +359,6 @@ function handle_aws_s3_ListBuckets({awsScriptProperties,commandArguments}) {
 
   outMessage.cards.push(card1);
 
-  if (debug) { Logger.log("function aws_s3_ListBuckets: Exit"); }
+  if (debug) { Logger.log("function aws_s3_ls: Exit"); }
   return outMessage;
-
-
 }
