@@ -81,6 +81,10 @@ If you want to customize the avatar icon that Google Chat uses for your chatbot 
 1. Select Navigation Menu (upper lefthand corner) > IAM & Admin > Service Accounts
 1. Select the GCP project that you want to create the service account for
 1. Select "Create Service Account"
+1. Enter the service account details that you want to use
+1. Select "Create"
+1. Select "Done"
+1. Select the "Email"(or Edit) of the new service account to navigate to the service account details
 1. Select "Add Key"
 
 ## Enable & Configure Google Hangouts Chat API
