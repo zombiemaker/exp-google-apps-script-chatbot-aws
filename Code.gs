@@ -23,7 +23,7 @@ var debug = false;
 
 function onMessage(event) {
   if (debug) { Logger.log("function onMessage: Enter"); }
-  Logger.log("function onMessage: Called by " + event.user.displayName + " in space " + event.space.displayName);
+  Logger.log("function onMessage: Called by " + event.user.displayName + " in " + event.space.type + " space " + event.space.name );
 
   var userName = "";
   
@@ -72,8 +72,7 @@ function onAddToSpace(event) {
   if (event.space.singleUserBotDm) {
     outMessage.text = "Hey buddy! What can I do for you, " + event.user.displayName + "?";
   } else {
-    outMessage.text = "Hey buddy! What can I do for you " +
-        (event.space.displayName ? event.space.displayName + "?": "in this chat?");
+    outMessage.text = "Hey buddy! What can I do for you in this chat?";
   }
 
   if (event.message) {
@@ -90,7 +89,7 @@ function onAddToSpace(event) {
  * @param {Object} event the event object from Hangouts Chat
  */
 function onRemoveFromSpace(event) {
-  console.info("Master bot removed from ",
+  console.info("aws.buddy bot removed from ",
       (event.space.name ? event.space.name : "this chat"));
 }
 
