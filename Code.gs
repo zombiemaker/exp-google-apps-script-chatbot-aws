@@ -23,7 +23,7 @@ var debug = false;
 
 function onMessage(event) {
   if (debug) { Logger.log("function onMessage: Enter"); }
-  if (debug) { Logger.log("function onMessage: Called by " + event.user.displayName + " in space " + event.space.displayName); }
+  Logger.log("function onMessage: Called by " + event.user.displayName + " in space " + event.space.displayName);
 
   var userName = "";
   
