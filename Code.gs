@@ -27,12 +27,8 @@ function onMessage(event) {
 
   var userName = "";
   
-  if (event.space.type == "DM") {
-    userName = "You";
-  } else {
-    userName = event.user.displayName;
-  }
-  
+  userName = (event.space.type == "DM" ? "You" : event.user.displayName);
+
   var inMessage = event.message;
 
   // if simple text message, outMessage.text should contain a string (https://developers.google.com/hangouts/chat/reference/message-formats/basic)
@@ -52,7 +48,7 @@ function onMessage(event) {
         outMessage.text = `Message contained ${msg.length} parts; 0 = ${msg[0]}`;
     }
   } else {
-    outMessage.text = "Type \"/aws help\" for more information";
+    outMessage.text = `Type "/aws help" for more information`;
   }
   
   if (debug) { Logger.log(`function onMessage: outMessage = ${JSON.stringify(outMessage)}`); }
@@ -111,7 +107,7 @@ function handleSlashCommand_aws(event) {
   }
 
   var inMessage = event.message;
-  var commandArguments = inMessage.text.split(" ");
+  var commandArguments = inMessage.text.split("\\s+");
 
   if (debug) {
     var logMsg = "Command arguments";
@@ -161,13 +157,13 @@ function handleSlashCommand_aws(event) {
 
       outMessage.text = 
 `/aws called without specified AWS service
-Type \"/aws help\" for more information`;
+Type "/aws help" for more information`;
       break;
 
     default:
       outMessage.text = 
 `Unrecognized aws sub-command ${commandArguments[1]}
-Type \"/aws help\" for more information`;
+Type "/aws help" for more information`;
   }
 
   if (debug) { Logger.log("function handleSlashCommand_aws: Exit"); }
@@ -246,13 +242,13 @@ function handle_aws_s3({awsScriptProperties, commandArguments}) {
 
       outMessage.text = 
 `/aws s3 called without specified service command
-Type \"/aws s3 help\" for more information`;
+Type "/aws s3 help" for more information`;
       break;
         
     default:
       outMessage.text = 
 `Unrecognized aws s3 service command ${commandArguments[2]}
-Type \"/aws s3 help\" for more information`;
+Type "/aws s3 help" for more information`;
   }
 
   if (debug) { Logger.log("function handle_aws_s3: Exit"); }
