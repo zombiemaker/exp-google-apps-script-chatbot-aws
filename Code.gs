@@ -23,7 +23,7 @@ var debug = false;
 
 function onMessage(event) {
   if (debug) { Logger.log("function onMessage: Enter"); }
-  if (debug) { Logger.log("function onMessage: Called by " + event.user.displayName); }
+  if (debug) { Logger.log("function onMessage: Called by " + event.user.displayName + " in space " + event.space.displayName); }
 
   var userName = "";
   
@@ -70,10 +70,10 @@ function onAddToSpace(event) {
   var outMessage = {};
 
   if (event.space.singleUserBotDm) {
-    outMessage.text = "Your Master has arrived, " + event.user.displayName + "!";
+    outMessage.text = "Hey buddy! What can I do for you, " + event.user.displayName + "?";
   } else {
-    outMessage.text = "Your Master has arrived, " +
-        (event.space.displayName ? event.space.displayName + "!": "to this chat!");
+    outMessage.text = "Hey buddy! What can I do for you " +
+        (event.space.displayName ? event.space.displayName + "?": "in this chat?");
   }
 
   if (event.message) {
@@ -127,29 +127,36 @@ function handleSlashCommand_aws(event) {
       break;
     
     case "iam":  // /aws iam
-      if (debug) { Logger.log("/aws iam command called"); }
+      if (debug) { Logger.log("/aws iam service command called"); }
 
       outMessage = handle_aws_iam(commandArguments);
       break;
 
     case "vpc":  // /aws vpc
-      if (debug) { Logger.log("/aws vpc command called"); }
+      if (debug) { Logger.log("/aws vpc service command called"); }
 
       outMessage = handle_aws_vpc(commandArguments);
       break;
 
     case "s3":  // /aws s3
-      if (debug) { Logger.log("/aws s3 command called"); }
+      if (debug) { Logger.log("/aws s3 service command called"); }
 
       outMessage = handle_aws_s3({ awsScriptProperties: awsScriptProperties, commandArguments: commandArguments });
       break;
 
     case "ec2":  // /aws ec2
-      if (debug) { Logger.log("/aws ec2 command called"); }
+      if (debug) { Logger.log("/aws ec2 service command called"); }
 
       outMessage = handle_aws_ec2(commandArguments);
       break;
       
+    case undefined:
+      if (debug) { Logger.log("/aws called without specified AWS service"); }
+
+      outMessage.text = "/aws called without specified AWS service"
+        + "\nType \"/aws help\" for more information";
+      break;
+
     default:
       outMessage.text = "Unrecognized aws sub-command " + commandArguments[1]
         + "\nType \"/aws help\" for more information";
@@ -166,12 +173,15 @@ function handleSlashCommand_aws(event) {
 function handle_aws_help({awsScriptProperties, commandArguments}) {
   if (debug) { Logger.log("function handle_aws_help: Enter"); }
   var outMessage = {};
-  outMessage.text = "Commands supported:"
-    + "\n/aws help = get help"
-    + "\n/aws iam = execute AWS IAM commands"
-    + "\n/aws vpc = execute AWS VPC commands"
-    + "\n/aws s3 = execute AWS S3 commands"
-    + "\n/aws ec2 = execute AWS EC2 commands";
+  outMessage.text = "Usage: /aws <service> <command> [parameters]"
+    + "\n  This bot will use similar command conventions that the AWS CLI provides."
+    + "\n\n  /aws help = get this help message"
+    + "\n  /aws <service> help = get help for commands for a specific AWS service"
+    + "\n\nAWS services supported:"
+    + "\n  - iam = AWS IAM service commands"
+    + "\n  - vpc = AWS VPC service commands"
+    + "\n  - s3 = AWS S3 commands"
+    + "\n  - ec2 = AWS EC2 commands";
 
   if (debug) { Logger.log("function handle_aws_help: Exit"); }
   return outMessage;
@@ -203,6 +213,11 @@ function handle_aws_s3({awsScriptProperties, commandArguments}) {
     case "help":  // /aws s3 help
       if (debug) { Logger.log("/aws s3 help command called"); }
       
+      outMessage.text = "Usage: /aws s3 <command> [parameters]"
+      + "\n\n  /aws s3 help = get this help message"
+      + "\n\nAWS s3 commands supported:"
+      + "\n  - ls = list S3 resources";
+
       outMessage = handle_aws_s3_help({ awsScriptProperties: awsScriptProperties, commandArguments: commandArguments });
       break;
     
@@ -212,6 +227,13 @@ function handle_aws_s3({awsScriptProperties, commandArguments}) {
       outMessage = handle_aws_s3_ListBuckets({ awsScriptProperties: awsScriptProperties, commandArguments: commandArguments });
       break;
 
+    case undefined:
+      if (debug) { Logger.log("/aws s3 called without command"); }
+
+      outMessage.text = "/aws called without specified AWS service"
+        + "\nType \"/aws help\" for more information";
+      break;
+        
     default:
       outMessage.text = "Unrecognized aws s3 sub-command " + commandArguments[2] 
         + "\n\n Sub-commands supported:"
