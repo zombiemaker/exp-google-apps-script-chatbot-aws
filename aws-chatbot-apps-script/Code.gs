@@ -238,23 +238,23 @@ function handle_aws_s3_ListBuckets({awsScriptProperties,commandArguments}) {
       ]
     };
 
-  var widget1 = {};
   
-  // TODO: h1 tags not working
-  card1.header.title = "<h1>AWS S3</h1>";
+  card1.header.title = "<b>AWS S3</b>";
   card1.header.subtitle = "List Buckets";
   card1.header.imageUrl = "";
   card1.header.imageStyle = "IMAGE";  // "IMAGE" or "AVATAR"
 
-  widget1.textParagraph = {};
-  widget1.textParagraph.text = "AWS Region: " + awsScriptProperties.default_region;
-  
-  card1.sections[0].widgets.push(widget1);
-  outMessage.cards.push(card1);
+  var awsRegionWidget = {
+    textParagraph: {
+      text: "<b>AWS Region:</b> " + awsScriptProperties.default_region
+    }
+  };
+  card1.sections[0].widgets.push(awsRegionWidget);
 
-  return outMessage;
 
+  // Call AWS Service
   AWS.init(awsScriptProperties.iam_accesskey, awsScriptProperties.iam_secretkey);
+
   var awsResult = AWS.request({
     service: 's3',
     region: awsScriptProperties.default_region,
@@ -263,6 +263,14 @@ function handle_aws_s3_ListBuckets({awsScriptProperties,commandArguments}) {
   });
   
   if (debug) { Logger.log(awsResult.getResponseCode()); }
+  var awsResponseCodeWidget = {
+    textParagraph: {
+      text: "<b>HTTP Response Code:</b> " + awsResult.getResponseCode()
+    }
+  };
+  card1.sections[0].widgets.push(awsResponseCodeWidget);
+
+
   if (debug) { Logger.log(awsResult.getContentText()); }
   
   var xmlDocument = XmlService.parse(awsResult.getContentText());
@@ -275,8 +283,14 @@ function handle_aws_s3_ListBuckets({awsScriptProperties,commandArguments}) {
   
   var bucketElements = bucketsElement.getChildren('Bucket',awsns);
   if (debug) { Logger.log("Number of Bucket elements = " + bucketElements.length); }
-  
-  var msgBuckets = '';
+  var numberOfBucketsWidget = {
+    textParagraph: {
+      text: "<b>Number of Buckets:</b> " + bucketElements.length
+    }
+  };
+  card1.sections[0].widgets.push(numberOfBucketsWidget);
+
+  var msgBuckets = "";
   
   for (var i = 0; i < bucketElements.length; i++) {
     if (debug) { Logger.log("Element name: " + bucketElements[i].getName() + " " + i); }
@@ -285,10 +299,24 @@ function handle_aws_s3_ListBuckets({awsScriptProperties,commandArguments}) {
     var creationDate = bucketElements[i].getChildText('CreationDate', awsns);
     
     if (debug) { Logger.log("Bucket: " + name + " created on " + creationDate); }
-    msgBuckets = msgBuckets + "\nBucket: " + name + " created on " + creationDate;
+    
+    if (i>0) { msgBuckets = msgBuckets + "<br>"; }
+    msgBuckets = msgBuckets + name;
   }
   
+  if (debug) { Logger.log("function aws_s3_ListBuckets: msgBuckets = " + msgBuckets); }
+
+  var bucketListWidget = {
+    textParagraph: {
+      text: msgBuckets
+    }
+  };
+  card1.sections[0].widgets.push(bucketListWidget);
+
+  outMessage.cards.push(card1);
 
   if (debug) { Logger.log("function aws_s3_ListBuckets: Exit"); }
-  return "awsResult.ResponseCode = " + awsResult.getResponseCode() + ":" + msgBuckets;
+  return outMessage;
+
+
 }
