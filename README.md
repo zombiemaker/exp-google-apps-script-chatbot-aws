@@ -136,4 +136,5 @@ If you want to customize the avatar icon that Google Chat uses for your chatbot 
 - GCP Developer Console - https://console.developers.google.com/
 - AWS JavaScript Client - https://github.com/smithy545/aws-apps-scripts
 - AWS JavaScript SDK (for reference - does not work in Google Apps Script) - https://github.com/aws/aws-sdk-js
-- GitHub Pages - https://docs.github.com/en/free-pro-team@latest/github/working-with-github-pages/getting-started-with-github-pages
+- GitHub Pages - https://pages.github.com/
+- Getting Started With GitHub Pages - https://docs.github.com/en/free-pro-team@latest/github/working-with-github-pages/getting-started-with-github-pages
