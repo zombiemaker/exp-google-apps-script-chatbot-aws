@@ -19,11 +19,11 @@
  */
 
 // Global variables
-var debug = false;
+var debug = true;
 
 function onMessage(event) {
   if (debug) { Logger.log("function onMessage: Enter"); }
-  Logger.log("function onMessage: Called by " + event.user.displayName + " in " + event.space.type + " space " + event.space.name );
+  Logger.log(`function onMessage: Called by ${event.user.displayName} in ${event.space.type} space ${event.space.name}`);
 
   var userName = "";
   
@@ -50,13 +50,13 @@ function onMessage(event) {
       
       default:
         msg = inMessage.text.split(" ");
-        outMessage.text = "Message contained " + msg.length + " parts; 0 = " + msg[0];
+        outMessage.text = `Message contained ${msg.length} parts; 0 = ${msg[0]}`;
     }
   } else {
     outMessage.text = "Type \"/aws help\" for more information";
   }
   
-  if (debug) { Logger.log("function onMessage: outMessage = " + JSON.stringify(outMessage)); }
+  if (debug) { Logger.log(`function onMessage: outMessage = ${JSON.stringify(outMessage)}`); }
   if (debug) { Logger.log("function onMessage: Exit"); }
   return outMessage;
 }
@@ -67,19 +67,21 @@ function onMessage(event) {
  * @param {Object} event the event object from Hangouts Chat
  */
 function onAddToSpace(event) {
+  if (debug) { Logger.log("function onAddToSpace: Enter"); }
   var outMessage = {};
 
   if (event.space.singleUserBotDm) {
-    outMessage.text = "Hey buddy! What can I do for you, " + event.user.displayName + "?";
+    outMessage.text = `Hey buddy! What can I do for you, ${event.user.displayName }?`;
   } else {
     outMessage.text = "Hey buddy! What can I do for you in this chat?";
   }
 
   if (event.message) {
     // Bot added through @mention.
-    outMessage.text = outMessage.text + " and you said: \"" + event.message.text + "\"";
+    outMessage.text = `${outMessage.text} and you said: \"${event.message.text}\"`;
   }
 
+  if (debug) { Logger.log("function onAddToSpace: Exit"); }
   return outMessage;
 }
 
@@ -89,8 +91,10 @@ function onAddToSpace(event) {
  * @param {Object} event the event object from Hangouts Chat
  */
 function onRemoveFromSpace(event) {
-  console.info("aws.buddy bot removed from ",
-      (event.space.name ? event.space.name : "this chat"));
+  if (debug) { Logger.log("function onRemoveFromSpace: Enter"); }
+
+  console.info("aws.buddy bot removed from ", (event.space.name ? event.space.name : "this chat"));
+  if (debug) { Logger.log("function onRemoveFromSpace: Exit"); }
 }
 
 /*
@@ -114,7 +118,9 @@ function handleSlashCommand_aws(event) {
     var logMsg = "Command arguments";
 
     for (var i = 0; i < commandArguments.length; i++) {
-      logMsg = logMsg + "\n  Argument " + i + ": " + commandArguments[i];
+      logMsg = 
+`${logMsg}
+  Argument ${i}: ${commandArguments[i]}`;
     }
 
     Logger.log(logMsg);
@@ -154,13 +160,15 @@ function handleSlashCommand_aws(event) {
     case undefined:
       if (debug) { Logger.log("/aws called without specified AWS service"); }
 
-      outMessage.text = "/aws called without specified AWS service"
-        + "\nType \"/aws help\" for more information";
+      outMessage.text = 
+`/aws called without specified AWS service
+Type \"/aws help\" for more information`;
       break;
 
     default:
-      outMessage.text = "Unrecognized aws sub-command " + commandArguments[1]
-        + "\nType \"/aws help\" for more information";
+      outMessage.text = 
+`Unrecognized aws sub-command ${commandArguments[1]}
+Type \"/aws help\" for more information`;
   }
 
   if (debug) { Logger.log("function handleSlashCommand_aws: Exit"); }
@@ -174,15 +182,27 @@ function handleSlashCommand_aws(event) {
 function handle_aws_help({awsScriptProperties, commandArguments}) {
   if (debug) { Logger.log("function handle_aws_help: Enter"); }
   var outMessage = {};
-  outMessage.text = "Usage: /aws <service> <command> [parameters]"
-    + "\n  This bot will use similar command conventions that the AWS CLI provides."
-    + "\n\n  /aws help = get this help message"
-    + "\n  /aws <service> help = get help for commands for a specific AWS service"
-    + "\n\nAWS services supported:"
-    + "\n  - iam = AWS IAM service commands"
-    + "\n  - vpc = AWS VPC service commands"
-    + "\n  - s3 = AWS S3 commands"
-    + "\n  - ec2 = AWS EC2 commands";
+  // outMessage.text = "Usage: /aws <service> <command> [parameters]"
+  //   + "\n  This bot will use similar command conventions that the AWS CLI provides."
+  //   + "\n\n  /aws help = get this help message"
+  //   + "\n  /aws <service> help = get help for commands for a specific AWS service"
+  //   + "\n\nAWS services supported:"
+  //   + "\n  - iam = AWS IAM service commands"
+  //   + "\n  - vpc = AWS VPC service commands"
+  //   + "\n  - s3 = AWS S3 commands"
+  //   + "\n  - ec2 = AWS EC2 commands";
+
+
+  outMessage.text = `Usage: /aws <service> <command> [parameters]
+This bot will use similar command conventions that the AWS CLI provides.
+  /aws help = get this help message
+  /aws <service> help = get help for commands for a specific AWS service
+
+AWS services supported:
+  - iam = AWS IAM service commands
+  - vpc = AWS VPC service commands
+  - s3 = AWS S3 commands
+  - ec2 = AWS EC2 commands`;
 
   if (debug) { Logger.log("function handle_aws_help: Exit"); }
   return outMessage;
@@ -235,14 +255,17 @@ function handle_aws_s3({awsScriptProperties, commandArguments}) {
     case undefined:
       if (debug) { Logger.log("/aws s3 called without command"); }
 
-      outMessage.text = "/aws called without specified AWS service"
-        + "\nType \"/aws help\" for more information";
+      outMessage.text = 
+`/aws called without specified AWS service
+Type \"/aws help\" for more information`;
       break;
         
     default:
-      outMessage.text = "Unrecognized aws s3 sub-command " + commandArguments[2] 
-        + "\n\n Sub-commands supported:"
-        + "\n/aws s3 list-buckets";
+      outMessage.text = 
+`Unrecognized aws s3 sub-command ${commandArguments[2]}
+
+Sub-commands supported:
+  /aws s3 list-buckets`;
   }
 
   if (debug) { Logger.log("function handle_aws_s3: Exit"); }
@@ -262,10 +285,13 @@ function handle_aws_s3_help({ awsScriptProperties, commandArguments }) {
   if (debug) { Logger.log("function handle_aws_s3_help: Enter"); }
   var outMessage = { cards: [] };
 
-  outMessage.text = "Usage: /aws s3 <command> [parameters]"
-    + "\n\n  /aws s3 help = get this help message"
-    + "\n\nAWS s3 commands supported:"
-    + "\n  - ls = list S3 resources";
+  outMessage.text = 
+`Usage: /aws s3 <command> [parameters]
+  
+  /aws s3 help = get this help message
+
+AWS s3 commands supported:
+  - ls = list S3 resources`;
 
   if (debug) { Logger.log("function handle_aws_s3_help: Exit"); }
   return outMessage;
@@ -283,14 +309,14 @@ function handle_aws_s3_ls({awsScriptProperties,commandArguments}) {
     };
 
   
-  card1.header.title = "<b>AWS S3</b>";
+  card1.header.title = "AWS S3";
   card1.header.subtitle = "List Buckets";
   card1.header.imageUrl = "";
   card1.header.imageStyle = "IMAGE";  // "IMAGE" or "AVATAR"
 
   var awsRegionWidget = {
     textParagraph: {
-      text: "<b>AWS Region:</b> " + awsScriptProperties.default_region
+      text: `<b>AWS Region:</b> ${awsScriptProperties.default_region}`
     }
   };
   card1.sections[0].widgets.push(awsRegionWidget);
@@ -309,7 +335,7 @@ function handle_aws_s3_ls({awsScriptProperties,commandArguments}) {
   if (debug) { Logger.log(awsResult.getResponseCode()); }
   var awsResponseCodeWidget = {
     textParagraph: {
-      text: "<b>HTTP Response Code:</b> " + awsResult.getResponseCode()
+      text: `<b>HTTP Response Code:</b> ${awsResult.getResponseCode()}`
     }
   };
   card1.sections[0].widgets.push(awsResponseCodeWidget);
@@ -320,16 +346,16 @@ function handle_aws_s3_ls({awsScriptProperties,commandArguments}) {
   var xmlDocument = XmlService.parse(awsResult.getContentText());
   var awsns = XmlService.getNamespace('http://s3.amazonaws.com/doc/2006-03-01/');
   var docRoot = xmlDocument.getRootElement();
-  if (debug) { Logger.log("Document root element name: " + docRoot.getName()); }
+  if (debug) { Logger.log(`Document root element name: ${docRoot.getName()}`); }
   
   var bucketsElement = docRoot.getChild('Buckets', awsns);
-  if (debug) { Logger.log("Buckets element: " + bucketsElement.getName()); }
+  if (debug) { Logger.log(`Buckets element: ${bucketsElement.getName()}`); }
   
   var bucketElements = bucketsElement.getChildren('Bucket',awsns);
-  if (debug) { Logger.log("Number of Bucket elements = " + bucketElements.length); }
+  if (debug) { Logger.log(`Number of Bucket elements = ${bucketElements.length}`); }
   var numberOfBucketsWidget = {
     textParagraph: {
-      text: "<b>Number of Buckets:</b> " + bucketElements.length
+      text: `<b>Number of Buckets:</b> ${bucketElements.length}`
     }
   };
   card1.sections[0].widgets.push(numberOfBucketsWidget);
@@ -337,18 +363,18 @@ function handle_aws_s3_ls({awsScriptProperties,commandArguments}) {
   var msgBuckets = "";
   
   for (var i = 0; i < bucketElements.length; i++) {
-    if (debug) { Logger.log("Element name: " + bucketElements[i].getName() + " " + i); }
+    if (debug) { Logger.log(`Element name: ${bucketElements[i].getName()} ${i}`); }
     
     var name = bucketElements[i].getChildText('Name', awsns);
     var creationDate = bucketElements[i].getChildText('CreationDate', awsns);
     
-    if (debug) { Logger.log("Bucket: " + name + " created on " + creationDate); }
+    if (debug) { Logger.log(`Bucket: ${name} created on ${creationDate}`); }
     
     if (i>0) { msgBuckets = msgBuckets + "<br>"; }
     msgBuckets = msgBuckets + name;
   }
   
-  if (debug) { Logger.log("function aws_s3_ls: msgBuckets = " + msgBuckets); }
+  if (debug) { Logger.log(`function aws_s3_ls: msgBuckets = ${msgBuckets}`); }
 
   var bucketListWidget = {
     textParagraph: {
