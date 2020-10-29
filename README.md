@@ -4,6 +4,7 @@ Sample chatbot to demonstrate various capabilities include:
 
 - Receive messages from Google Chat
 - Process slash commands
+- Create simple and card Google Chat messages
 - Connect to AWS services
 
 These instructions are based on Google Cloud Platform, Google Apps Script, and Google Chat as of October, 2020.
