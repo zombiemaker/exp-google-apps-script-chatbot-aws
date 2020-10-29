@@ -118,6 +118,7 @@ If you want to customize the avatar icon that Google Chat uses for your chatbot 
     1. "/aws s3"
     1. "/aws s3 ls"
     1. "/aws ec2"
+1. NOTE:  When using the Google Chat slash commands, you will need to either select them from the list as you type the command or type the tab key.  Otherwise, Google Chat does not recognize the text literal "/aws" as a slash command.  (Stupid)
 
 ## View Apps Script Execution Logs
 
