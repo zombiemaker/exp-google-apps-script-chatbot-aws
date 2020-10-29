@@ -42,11 +42,11 @@ These instructions are based on Google Cloud Platform, Google Apps Script, and G
 
 1. From your Apps Script project screen, select Publish > "Deploy from manifest"
 1. Note that there is a deployment called "Latest Version (Head)"
-  1. This will point to your latest published version.
-  1. Use the ID of this deployment to configure your Google Hangouts Chat API.
-  1. Get the ID for this deployment by selecting "Get ID"
-  1. Copy the "Deployment ID" value
-  1. Select "Close"
+    1. This will point to your latest published version.
+    1. Use the ID of this deployment to configure your Google Hangouts Chat API.
+    1. Get the ID for this deployment by selecting "Get ID"
+    1. Copy the "Deployment ID" value
+    1. Select "Close"
 1. Select "Create"
 1. Type in a name for the deployment
 1. Select "Save"
@@ -90,12 +90,12 @@ These instructions are based on Google Cloud Platform, Google Apps Script, and G
 1. Select the "+" symbot to add a bot
 1. In the search bar, type in the name of the chatbot that you configured in the GCP Google Hangouts Chat API settings.
 1. Once added, test out the bot commands such as:
-  1. "/aws help"
-  1. "/aws iam"
-  1. "/aws vpc"
-  1. "/aws s3"
-  1. "/aws s3 list-buckets"
-  1. "/aws ec2"
+    1. "/aws help"
+    1. "/aws iam"
+    1. "/aws vpc"
+    1. "/aws s3"
+    1. "/aws s3 list-buckets"
+    1. "/aws ec2"
 
 ## View Apps Script Execution Logs
 
