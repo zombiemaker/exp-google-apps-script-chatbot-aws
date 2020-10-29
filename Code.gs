@@ -181,16 +181,6 @@ Type \"/aws help\" for more information`;
 function handle_aws_help({awsScriptProperties, commandArguments}) {
   if (debug) { Logger.log("function handle_aws_help: Enter"); }
   var outMessage = {};
-  // outMessage.text = "Usage: /aws <service> <command> [parameters]"
-  //   + "\n  This bot will use similar command conventions that the AWS CLI provides."
-  //   + "\n\n  /aws help = get this help message"
-  //   + "\n  /aws <service> help = get help for commands for a specific AWS service"
-  //   + "\n\nAWS services supported:"
-  //   + "\n  - iam = AWS IAM service commands"
-  //   + "\n  - vpc = AWS VPC service commands"
-  //   + "\n  - s3 = AWS S3 commands"
-  //   + "\n  - ec2 = AWS EC2 commands";
-
 
   outMessage.text = `Usage: /aws <service> <command> [parameters]
 This bot will use similar command conventions that the AWS CLI provides.
