@@ -37,7 +37,7 @@ function onMessage(event) {
 
   // if simple text message, outMessage.text should contain a string (https://developers.google.com/hangouts/chat/reference/message-formats/basic)
   // if card message, outmessage.cards should contain a card object (https://developers.google.com/hangouts/chat/reference/message-formats/cards)
-  var outMessage;
+  var outMessage = {};
   
   if (inMessage.slashCommand) {
     switch (inMessage.slashCommand.commandId) {
@@ -52,7 +52,7 @@ function onMessage(event) {
         outMessage.text = "Message contained " + msg.length + " parts; 0 = " + msg[0];
     }
   } else {
-    outMessage.text = "Type \"/aws help\" for commands";    
+    outMessage.text = "Type \"/aws help\" for more information";
   }
   
   if (debug) { Logger.log("function onMessage: outMessage = " + JSON.stringify(outMessage)); }
@@ -150,7 +150,8 @@ function handleSlashCommand_aws(event) {
       break;
       
     default:
-      outMessage = "Unrecognized aws sub-command " + commandArguments[1];
+      outMessage.text = "Unrecognized aws sub-command " + commandArguments[1]
+        + "\nType \"/aws help\" for more information";
   }
 
   if (debug) { Logger.log("function handleSlashCommand_aws: Exit"); }
@@ -161,28 +162,33 @@ function handleSlashCommand_aws(event) {
 
 
 /***************** AWS Commands *****************/
-function handle_aws_help(commandArguments) {
+function handle_aws_help({awsScriptProperties, commandArguments}) {
   if (debug) { Logger.log("function handle_aws_help: Enter"); }
-  var outmessage = {};
-  outMessage.text = "/aws help RETURN MESSAGE"
+  var outMessage = {};
+  outMessage.text = "Commands supported:"
+    + "\n/aws help = get help"
+    + "\n/aws iam = execute AWS IAM commands"
+    + "\n/aws vpc = execute AWS VPC commands"
+    + "\n/aws s3 = execute AWS S3 commands"
+    + "\n/aws ec2 = execute AWS EC2 commands";
 
   if (debug) { Logger.log("function handle_aws_help: Exit"); }
   return outMessage;
 }
 
-function handle_aws_iam(commandArguments) {
+function handle_aws_iam({awsScriptProperties, commandArguments}) {
   if (debug) { Logger.log("function handle_aws_iam: Enter"); }
   var outMessage = {};
-  outMessage.text = "/aws iam RESPONSE MESSAGE"
+  outMessage.text = "/aws iam COMMAND NOT IMPLEMENTED"
 
   if (debug) { Logger.log("function handle_aws_iam: Exit"); }
   return outMessage
 }
 
-function handle_aws_vpc(commandArguments) {
+function handle_aws_vpc({awsScriptProperties, commandArguments}) {
   if (debug) { Logger.log("function handle_aws_vpc: Enter"); }
   var outMessage = {};
-  outMessage.text = "/aws vpc RESPONSE MESSAGE"
+  outMessage.text = "/aws vpc COMMAND NOT IMPLEMENTED"
 
   if (debug) { Logger.log("function handle_aws_vpc: Exit"); }
   return outMessage
@@ -191,8 +197,7 @@ function handle_aws_vpc(commandArguments) {
 function handle_aws_s3({awsScriptProperties, commandArguments}) {
   if (debug) { Logger.log("function handle_aws_s3: Enter"); }
   var outMessage = {};
-  outMessage.text = "/aws s3 RESPONSE MESSAGE"
-
+  
   switch (commandArguments[2]) {
     case "help":  // /aws s3 help
       if (debug) { Logger.log("/aws s3 help command called"); }
@@ -207,17 +212,19 @@ function handle_aws_s3({awsScriptProperties, commandArguments}) {
       break;
 
     default:
-      outMessage = "Unrecognized aws s3 sub-command " + commandArguments[2];
+      outMessage.text = "Unrecognized aws s3 sub-command " + commandArguments[2] 
+        + "\n\n Sub-commands supported:"
+        + "\n/aws s3 list-buckets";
   }
 
   if (debug) { Logger.log("function handle_aws_s3: Exit"); }
   return outMessage
 }
 
-function handle_aws_ec2(args){
+function handle_aws_ec2({awsScriptProperties, commandArguments}) {
   if (debug) { Logger.log("function handle_aws_ec2: Enter"); }
   var outMessage = {};
-  outMessage.text = "/aws ec2 RESPONSE MESSAGE"
+  outMessage.text = "/aws ec2 COMMAND NOT IMPLEMENTED"
 
   if (debug) { Logger.log("function handle_aws_ec2: Exit"); }
   return outMessage
