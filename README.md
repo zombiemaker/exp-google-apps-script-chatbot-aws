@@ -105,12 +105,17 @@ If you want to customize the avatar icon that Google Chat uses for your chatbot 
 1. Set permissions to the individual users or user groups that you want to allow access to install the bot
 1. Select "Save"
 
-## Test ChatBot In Google Chat
+## Add ChatBot To Google Chat As Direct Message
 
 1. Navigate in a web browser to Google Chats - https://chat.google.com/
 1. Scroll down to the "Bots" section
-1. Select the "+" symbot to add a bot
+1. Select the "+" symbol to add a bot
 1. In the search bar, type in the name of the chatbot that you configured in the GCP Google Hangouts Chat API settings.
+1. When you use a bot for the first time, you will get a response with a link displayed as "Configure"
+1. Select "Configure" and allow the bot to connect to an external service
+
+## Test ChatBot In Google Chat
+
 1. Once added, test out the bot commands such as:
     1. "/aws help"
     1. "/aws iam"

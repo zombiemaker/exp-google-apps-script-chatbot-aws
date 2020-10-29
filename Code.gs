@@ -107,7 +107,7 @@ function handleSlashCommand_aws(event) {
   }
 
   var inMessage = event.message;
-  var commandArguments = inMessage.text.split("\\s+");
+  var commandArguments = inMessage.text.trim().split(/\ +/);  // GCP V8 engine does not like split("\\s+") or split(" +")
 
   if (debug) {
     var logMsg = "Command arguments";
@@ -162,7 +162,7 @@ Type "/aws help" for more information`;
 
     default:
       outMessage.text = 
-`Unrecognized aws sub-command ${commandArguments[1]}
+`Unrecognized AWS service ${commandArguments[1]}
 Type "/aws help" for more information`;
   }
 
