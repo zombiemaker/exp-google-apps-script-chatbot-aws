@@ -90,6 +90,7 @@ These instructions are based on Google Cloud Platform, Google Apps Script, and G
   . "/aws iam"
   . "/aws vpc"
   . "/aws s3"
+  . "/aws s3 list-buckets"
   . "/aws ec2"
 
 ## View Apps Script Execution Logs
