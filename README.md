@@ -52,6 +52,22 @@ These instructions are based on Google Cloud Platform, Google Apps Script, and G
 1. Type in a name for the deployment
 1. Select "Save"
 
+## (Optional) Hosting Google Chat Avatar Icon File Using GitHub Pages
+
+If you want to customize the avatar icon that Google Chat uses for your chatbot and you need a place to host the icon file, you can use GitHub Pages.  If you store your git repo for this project in GitHub, this gives you the added convenience of storing the icon file with your source code.
+
+1. Create a repo for your project on GitHub
+1. Push your code to the repo with the icon file
+1. Navigate to the Settings page for the repository
+1. Scroll down to the "GitHub Pages" section
+1. Select the source for your GitHub Pages for th project
+1. Select "Save
+1. Select "Choose a theme"
+1. Select a theme
+1. Use a web browser to navigate to your GitHub Pages for the project.  The URL follows the pattern: https://<GitHub username>.github.io/<repo name>
+1. The URL to the icon file is: https://<GitHub username>.github.io/<repo name>/<path to icon file>
+1. Use that URL when you configure Google Chat Hangouts API setting in you GCP project
+
 ## Create A Google Cloud Platform (GCP) Project
 
 1. Read https://cloud.google.com/resource-manager/docs/creating-managing-projects
@@ -115,3 +131,4 @@ These instructions are based on Google Cloud Platform, Google Apps Script, and G
 - GCP Developer Console - https://console.developers.google.com/
 - AWS JavaScript Client - https://github.com/smithy545/aws-apps-scripts
 - AWS JavaScript SDK (for reference - does not work in Google Apps Script) - https://github.com/aws/aws-sdk-js
+- GitHub Pages - https://docs.github.com/en/free-pro-team@latest/github/working-with-github-pages/getting-started-with-github-pages
