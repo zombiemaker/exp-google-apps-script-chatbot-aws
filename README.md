@@ -73,6 +73,7 @@ If you want to customize the avatar icon that Google Chat uses for your chatbot 
 1. Read https://cloud.google.com/resource-manager/docs/creating-managing-projects
 1. Navigate in a web browser to GCP Resource Manager - https://console.cloud.google.com/cloud-resource-manager
 1. Select "Create Project"
+1. NOTE: There seems to be a bug in GCP here where the new project does not appear on the webpage.  Simply refresh the webpage.
 
 ## Create A Service Account On Google Cloud Platform (GCP)
 
