@@ -127,8 +127,8 @@ If you want to customize the avatar icon that Google Chat uses for your chatbot 
 1. Scroll down to the "Bots" section
 1. Select the "+" symbol to add a bot
 1. In the search bar, type in the name of the chatbot that you configured in the GCP Google Hangouts Chat API settings.
-1. When you use a bot for the first time, you will get a response with a link displayed as "Configure"
-1. Select "Configure" and allow the bot to connect to an external service
+1. When you use a bot for the first time, you may get a response with a link displayed as "Configure"
+1. Select "Configure" and allow the bot to have the authorizations it needs
 
 ## Test ChatBot In Google Chat
 
@@ -154,6 +154,7 @@ If you want to customize the avatar icon that Google Chat uses for your chatbot 
 - V8 Engine - https://v8.dev/
 - Google Apps Script Guide - https://developers.google.com/apps-script/overview
 - Google Apps Script Reference - https://developers.google.com/apps-script/reference
+- Google Apps Script Manifest File for Google Chat API - https://developers.google.com/hangouts/chat/how-tos/bots-apps-script#manifest_file
 - GCP Resource Manager - https://console.cloud.google.com/cloud-resource-manager
 - GCP Developer Console - https://console.developers.google.com/
 - GCP Hangouts Chat Bot - https://developers.google.com/hangouts/chat/how-tos/bots-publish
