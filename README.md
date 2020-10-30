@@ -39,6 +39,22 @@ These instructions are based on Google Cloud Platform, Google Apps Script, and G
 1. In the property value field, type in the default AWS region (e.g. "us-east-2")
 1. Select "Save"
 
+## Configure Google Apps Script Script Manifest File
+
+1. From your Apps Script project screen, select View and enable "Show manifest file" 
+1. Edit the appsscript.json file
+1. Add the following to JSON object:
+````
+{
+  ....
+  "chat": {
+    "addToSpaceFallbackMessage": "Thank you for adding me!"
+  }
+  ....
+}
+````
+1. Save the file
+
 ## Publish / Deploy Google Apps Script Project
 
 1. From your Apps Script project screen, select Publish > "Deploy from manifest"
