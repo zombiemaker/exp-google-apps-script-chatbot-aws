@@ -63,6 +63,8 @@ function onMessage(event) {
  */
 function onAddToSpace(event) {
   if (debug) { Logger.log("function onAddToSpace: Enter"); }
+  Logger.log(`function onMessage: Called by ${event.user.displayName} in ${event.space.type} space ${event.space.name}`);
+
   var outMessage = {};
 
   if (event.space.singleUserBotDm) {
@@ -87,6 +89,7 @@ function onAddToSpace(event) {
  */
 function onRemoveFromSpace(event) {
   if (debug) { Logger.log("function onRemoveFromSpace: Enter"); }
+  Logger.log(`function onMessage: Called by ${event.user.displayName} in ${event.space.type} space ${event.space.name}`);
 
   console.info("aws.buddy bot removed from ", (event.space.name ? event.space.name : "this chat"));
   if (debug) { Logger.log("function onRemoveFromSpace: Exit"); }
