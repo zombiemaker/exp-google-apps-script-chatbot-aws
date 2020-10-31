@@ -9,6 +9,10 @@ Sample chatbot to demonstrate various capabilities include:
 
 These instructions are based on Google Cloud Platform, Google Apps Script, and Google Chat as of October, 2020.
 
+## Architecture
+
+![Landscape Architecture](docs/images/chatbot-architecture.png)
+
 ## Prerequisites
 
 - Hava a valid AWS access key and secret key pair
