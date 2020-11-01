@@ -159,6 +159,7 @@ If you want to customize the avatar icon that Google Chat uses for your chatbot 
 
 1. Navigate in a web browser to Google Apps Script Executions - https://script.google.com/home/executions
 1. Select "My Executions"
+![My Executions](docs/images/google-apps-script-my-executions.png)
 1. Select the execution that you want to view - the details of the execution should expand
 1. View the log messages created from the Logger.log statements
 
