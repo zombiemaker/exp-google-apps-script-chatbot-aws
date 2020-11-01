@@ -9,9 +9,19 @@ Sample chatbot to demonstrate various capabilities include:
 
 These instructions are based on Google Cloud Platform, Google Apps Script, and Google Chat as of October, 2020.
 
-## Architecture
+## General Architecture
 
-![Landscape Architecture](docs/images/chatbot-architecture.png)
+The general vision of chatbots within a persistent group chat channel / room is to create a single shared command console so that everyone within the team can interact with other services to accomplish team tasks.  A way of realizing this vision is to create a collection of chatbots that can perform either atomic or composite tasks.  These automated tasks enable the team to handle a variety of different situations such as handling incidents that are reported by users of the digital business services / capabilities that the team supports.
+
+By using a persistent group chat channel for human-to-human, human-to-systems, and systems-to-human communications, everyone on the team has visibility to both the current situation as well as the history of events and actions taken by other team members.
+
+![General  Architecture](docs/images/chatbot-architecture.png)
+
+## Implemented Architecture
+
+The following diagram illustrates the architecture of this sample chatbot.
+
+![Implemented Architecture](docs/images/google-apps-script-chatbot.png)
 
 ## Prerequisites
 
