@@ -25,7 +25,7 @@ The following diagram illustrates the architecture of this sample chatbot.
 
 ## Prerequisites
 
-- Hava a valid AWS access key and secret key pair
+- Have a valid AWS access key and secret key pair
 - Have a developer user account at Google Cloud Platform (https://console.developers.google.com/)
 
 ## Create A Google Apps Script Project
